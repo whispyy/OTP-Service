@@ -1,0 +1,17 @@
+{
+  "name": "otp-service",
+  "version": "1.0.0",
+  "description": "TOTP/HOTP code generator and auth",
+  "main": "index.js",
+  "scripts": {
+    "generate:token": "node -e \"require('./index').generateToken($npm_config_key)\"",
+    "generate:qrcode": "node -e \"require('./index').generateQRCode($npm_config_user, $npm_config_service, $npm_config_secret)\"",
+    "validate": "node -e \"require('./index').validate($npm_config_secret, $npm_config_token)\""
+  },
+  "author": "Whispyy",
+  "license": "ISC",
+  "dependencies": {
+    "otplib": "^12.0.1",
+    "qrcode": "^1.5.0"
+  }
+}
