@@ -1,6 +1,6 @@
 {
   "name": "otp-service",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TOTP/HOTP code generator and auth",
   "main": "index.js",
   "scripts": {
