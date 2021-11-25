@@ -6,27 +6,25 @@ exports.generateToken = (key) => {
   const secret = key ?? authenticator.generateSecret()
   const token = authenticator.generate(secret)
 
-  console.log(secret, ':', token)
   return { token, secret }
 }
 
-exports.generateQRCode = (user, service, secret) => {
-  const otpauth = authenticator.keyuri(user, service, secret)
-
-  qrcode.toDataURL(otpauth, (err, imageUrl) => {
-    if (err) {
-      console.log('Error with QR')
-      return
-    }
-    console.log(imageUrl)
-    return imageUrl
-  });
+exports.generateQRCode = async (user, service, secret) => {
+  try {
+    const otpauth = authenticator.keyuri(user, service, secret)
+    const imageUrl = await qrcode.toDataURL(otpauth)
+  
+    return imageUrl;
+  } catch (err) {
+    console.error(err);
+  }
 }
+
 
 exports.validate = (secret, token) => {
   try {
     const isValid = authenticator.check(token, secret)
-    console.log('isValid', isValid)
+
     return isValid
   } catch (err) {
     console.error(err);
